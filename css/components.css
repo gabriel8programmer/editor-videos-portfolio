@@ -450,10 +450,21 @@
   pointer-events: none;
 }
 
-.contact-link svg {
-  width: 18px;
-  height: 18px;
+.contact-link svg,
+.contact-link .brand-icon {
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
+}
+
+.contact-link .brand-icon {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.contact-link--freelas99:hover {
+  border-color: rgba(0, 174, 239, 0.55);
+  background: rgba(0, 174, 239, 0.12);
 }
 
 /* Video modal */

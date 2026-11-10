@@ -13,16 +13,14 @@ const siteConfig = {
   name: "Gabriel",
   brand: "Gabriel.Edit",
   /** Substitua pelo domínio real após publicar (também em index.html, robots.txt e sitemap.xml) */
-  canonicalUrl: "https://SEU-DOMINIO.com/",
+  canonicalUrl: "https://gabrieleditorvideo.vercel.app/",
   contact: {
-    /** Ex.: https://wa.me/5511999999999 */
-    whatsapp: "",
-    /** Ex.: mailto:seuemail@exemplo.com */
-    email: "",
+    whatsapp: "https://wa.me/5561995815904",
+    email: "mailto:gabriel8webprogrammer@gmail.com",
     freelas99: "https://www.99freelas.com.br/user/Gabriel-programmer",
     /** Preencha quando tiver o perfil */
-    workana: ""
-  }
+    workana: "",
+  },
 };
 
 /**
@@ -36,7 +34,7 @@ const categories = [
   "Publicidade e Produtos",
   "Cortes de Podcasts",
   "Conteúdo para YouTube",
-  "Outros Projetos"
+  "Outros Projetos",
 ];
 
 /**
@@ -60,39 +58,36 @@ const projects = [
     id: 1,
     title: "Apenas Comece",
     category: "Vídeos Motivacionais",
-    description:
-      "Reels motivacional com ritmo dinâmico, legendas e trilha.",
+    description: "Reels motivacional com ritmo dinâmico, legendas e trilha.",
     thumbnail: "assets/images/apenas-comece.webp",
     videoType: "youtube",
     videoId: "IJM13g-7gwo",
     orientation: "vertical",
     tools: ["CapCut", "Legendas"],
-    featured: true
+    featured: true,
   },
   {
     id: 2,
     title: "Motivacional-corte",
     category: "Reels e Shorts",
-    description:
-      "Edição com legendas animadas e cortes precisos.",
+    description: "Edição com legendas animadas e cortes precisos.",
     thumbnail: "assets/images/motivacional-corte.webp",
     videoType: "youtube",
     videoId: "y9C8157rPwA",
     orientation: "vertical",
     tools: ["CapCut", "Legendas animadas"],
-    featured: true
+    featured: true,
   },
   {
     id: 3,
     title: "Comercial Zynov Lab",
     category: "Publicidade e Produtos",
-    description:
-      "Publicidade de produto com recursos de IA.",
+    description: "Publicidade de produto com recursos de IA.",
     thumbnail: "assets/images/comercial-zynov-lab.webp",
     videoType: "youtube",
-    videoId: "2p4vzvvpxj8",
+    videoId: "IoAEBwfWg74",
     orientation: "horizontal",
     tools: ["CapCut", "Inteligência Artificial"],
-    featured: true
-  }
+    featured: true,
+  },
 ];

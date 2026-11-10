@@ -48,12 +48,29 @@
   });
 
   /* ---------- Contato / footer links ---------- */
+  const brandIcons = {
+    freelas99: {
+      src: "assets/icons/99freelas.webp",
+      srcSm: "assets/icons/99freelas-sm.webp",
+      width: 20,
+      height: 20,
+      alt: "Logo 99Freelas"
+    }
+  };
+
   const contactIcons = {
     whatsapp: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.15 6.4 2.15 11.84c0 1.96.55 3.8 1.5 5.38L2 22l4.95-1.6a9.86 9.86 0 0 0 5.09 1.4h.01c5.46 0 9.89-4.4 9.89-9.84C21.94 6.4 17.5 2 12.04 2zm5.75 14.07c-.24.67-1.4 1.23-1.93 1.31-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.26-4.79-4.2-4.93-4.4-.14-.19-1.17-1.56-1.17-2.98 0-1.42.74-2.12 1-2.41.26-.29.57-.36.76-.36h.55c.17 0 .4-.07.63.48.24.56.82 2 .89 2.14.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.56.17.28.74 1.22 1.59 1.97 1.1.97 2.02 1.27 2.3 1.41.29.14.45.12.62-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.1 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.69-.17 1.36z"/></svg>`,
     email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></svg>`,
-    freelas99: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19.5c1.5-3.2 3.8-4.8 7-4.8s5.5 1.6 7 4.8"/></svg>`,
     workana: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 17 8.5 7l3.5 7 3.5-7L20 17"/><path d="M6.5 13h4M13.5 13h4"/></svg>`
   };
+
+  function brandIconMarkup(key, { small = false } = {}) {
+    const icon = brandIcons[key];
+    if (!icon) return contactIcons[key] || "";
+    const src = small ? icon.srcSm : icon.src;
+    const size = small ? 16 : icon.width;
+    return `<img class="brand-icon" src="${src}" alt="" width="${size}" height="${size}" loading="lazy" decoding="async" aria-hidden="true" />`;
+  }
 
   function renderContactLinks() {
     const container = document.getElementById("contact-links");
@@ -72,10 +89,11 @@
 
     items.forEach(({ key, label, href }) => {
       const hasLink = Boolean(href && String(href).trim());
+      const iconHtml = brandIconMarkup(key);
 
       const contactBtn = document.createElement(hasLink ? "a" : "span");
-      contactBtn.className = `contact-link${hasLink ? "" : " is-disabled"}`;
-      contactBtn.innerHTML = `${contactIcons[key] || ""}<span>${label}${hasLink ? "" : " (em breve)"}</span>`;
+      contactBtn.className = `contact-link contact-link--${key}${hasLink ? "" : " is-disabled"}`;
+      contactBtn.innerHTML = `${iconHtml}<span>${label}${hasLink ? "" : " (em breve)"}</span>`;
       if (hasLink) {
         contactBtn.href = href;
         contactBtn.target = href.startsWith("mailto:") || href.startsWith("https://wa.me") ? "_self" : "_blank";
@@ -87,9 +105,15 @@
       container.appendChild(contactBtn);
 
       if (hasLink && footerSocial) {
+        // Rodapé: apenas ícones (WhatsApp, e-mail, 99Freelas)
+        if (key === "workana") return;
+
         const foot = document.createElement("a");
+        foot.className = `footer-social-link footer-social-link--${key}`;
         foot.href = href;
-        foot.textContent = label;
+        foot.setAttribute("aria-label", label);
+        foot.title = label;
+        foot.innerHTML = brandIconMarkup(key, { small: false });
         if (!href.startsWith("mailto:") && !href.startsWith("https://wa.me")) {
           foot.target = "_blank";
           foot.rel = "noopener noreferrer";

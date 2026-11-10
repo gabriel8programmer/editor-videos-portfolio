@@ -82,7 +82,7 @@ Em `js/projects.js`, objeto `siteConfig.contact`:
 | `freelas99` | já preenchido                                |
 | `workana`   | URL do perfil quando disponível              |
 
-Após publicar, substitua `https://SEU-DOMINIO.com/` em:
+Após publicar, substitua `https://gabrieleditorvideo.vercel.app/` em:
 
 - `index.html` (canonical, Open Graph, Twitter, JSON-LD)
 - `robots.txt`
