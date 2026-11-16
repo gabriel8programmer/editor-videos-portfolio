@@ -37,6 +37,10 @@
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 900px) {
@@ -100,14 +104,96 @@
     justify-content: center;
   }
 
+}
+
+/* Modal de vídeo em tela cheia (celular em pé ou deitado) */
+@media (max-width: 640px), (max-height: 500px) {
   .video-modal {
     padding: 0;
-    align-items: end;
+    place-items: stretch;
+  }
+
+  .video-modal-backdrop {
+    background: #000;
+    backdrop-filter: none;
   }
 
   .video-modal-dialog {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    max-height: 94vh;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    height: 100%;
+    max-height: none;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #000;
+    box-shadow: none;
+  }
+
+  .video-modal-header {
+    flex: none;
+    padding: 0.6rem 0.9rem 0.6rem 1.1rem;
+    padding-top: max(0.6rem, env(safe-area-inset-top));
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    background: var(--bg-elevated);
+  }
+
+  .video-modal-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .video-modal-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 env(safe-area-inset-bottom);
+  }
+
+  .video-frame {
+    border-radius: 0;
+  }
+
+  /* Horizontal: ocupa a largura toda, centralizado na vertical */
+  .video-frame[data-orientation="horizontal"] {
+    width: 100%;
+  }
+
+  /* Vertical (Shorts): ocupa a altura disponível, centralizado */
+  .video-frame[data-orientation="vertical"] {
+    width: min(100%, calc((100vh - 64px) * 9 / 16));
+    max-width: none;
+    max-height: none;
+    margin-inline: 0;
+    aspect-ratio: 9 / 16;
+  }
+
+  @supports (height: 100dvh) {
+    .video-frame[data-orientation="vertical"] {
+      width: min(100%, calc((100dvh - 64px) * 9 / 16));
+    }
+  }
+
+  .video-modal-placeholder {
+    margin: 1rem;
+  }
+}
+
+/* Celular deitado: o vídeo horizontal respeita a altura disponível */
+@media (max-height: 500px) and (orientation: landscape) {
+  .video-frame[data-orientation="horizontal"] {
+    width: min(100%, calc((100vh - 64px) * 16 / 9));
+  }
+
+  @supports (height: 100dvh) {
+    .video-frame[data-orientation="horizontal"] {
+      width: min(100%, calc((100dvh - 64px) * 16 / 9));
+    }
   }
 }
