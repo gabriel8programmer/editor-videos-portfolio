@@ -188,6 +188,28 @@
     return article;
   }
 
+  function createClientGroup(client, groupProjects) {
+    const section = document.createElement("section");
+    section.className = "client-group reveal";
+    section.setAttribute("aria-label", `Vídeos do cliente ${client}`);
+
+    const count = groupProjects.length;
+    section.innerHTML = `
+      <header class="client-group-header">
+        <div>
+          <p class="client-group-kicker">Cliente</p>
+          <h3 class="client-group-name">${escapeHtml(client)}</h3>
+        </div>
+        <p class="client-group-count">${count} vídeos</p>
+      </header>
+      <div class="client-group-grid"></div>
+    `;
+
+    const inner = section.querySelector(".client-group-grid");
+    groupProjects.forEach((project) => inner.appendChild(createProjectCard(project)));
+    return section;
+  }
+
   function renderFilters() {
     if (!filtersEl || typeof categories === "undefined") return;
     filtersEl.innerHTML = "";
@@ -224,6 +246,13 @@
       if (match) visible += 1;
     });
 
+    grid.querySelectorAll(".client-group").forEach((group) => {
+      const anyVisible = [...group.querySelectorAll(".project-card")].some(
+        (card) => !card.classList.contains("is-hidden")
+      );
+      group.classList.toggle("is-hidden", !anyVisible);
+    });
+
     if (emptyEl) emptyEl.hidden = visible > 0;
     observeReveals();
   }
@@ -239,7 +268,22 @@
       return Number(a.id) - Number(b.id);
     });
 
-    list.forEach((project) => {
+    list.forEach((project, index) => {
+      const sameClient =
+        project.client &&
+        index > 0 &&
+        list[index - 1].client === project.client;
+      if (sameClient) return;
+
+      const groupProjects = project.client
+        ? list.filter((item) => item.client === project.client)
+        : [project];
+
+      if (project.client && groupProjects.length > 1) {
+        grid.appendChild(createClientGroup(project.client, groupProjects));
+        return;
+      }
+
       grid.appendChild(createProjectCard(project));
     });
 

@@ -124,7 +124,8 @@
   background: var(--card-hover);
 }
 
-.project-card.is-hidden {
+.project-card.is-hidden,
+.client-group.is-hidden {
   display: none;
 }
 
@@ -190,6 +191,58 @@
   transform: scale(1.08);
   background: rgba(139, 92, 246, 0.85);
   border-color: transparent;
+}
+
+.client-group {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.08), transparent 42%),
+    var(--bg-elevated);
+}
+
+.client-group-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.15rem 0.35rem 0;
+}
+
+.client-group-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.client-group-name {
+  margin: 0.15rem 0 0;
+  font-size: 1.35rem;
+}
+
+.client-group-count {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.client-group-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 640px) {
+  .client-group-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .project-badge {
