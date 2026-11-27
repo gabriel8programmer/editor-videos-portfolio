@@ -91,18 +91,6 @@ const projects = [
     featured: true,
   },
   {
-    id: 4,
-    title: "Meu Primeiro Projeto",
-    category: "Vídeos Motivacionais",
-    description: "Vídeo motivacional em formato horizontal, com legendas e trilha.",
-    thumbnail: "assets/images/meu-primeiro-projeto.webp",
-    videoType: "youtube",
-    videoId: "MGOlYCwTLKc",
-    orientation: "horizontal",
-    tools: ["CapCut", "Legendas"],
-    featured: true,
-  },
-  {
     id: 5,
     title: "Continue",
     category: "Vídeos Motivacionais",
